@@ -27,23 +27,24 @@ root.rowconfigure(1, weight=0)
 
 
 #Hierarchical treeview-----
-database_HierTreeview = ttk.Treeview(root, columns="database_tree", show="headings")
-database_HierTreeview.heading("database_tree", text="Database Tree")
-#todo fix data not showing right
-#data--
-database_HierTreeview.insert("", "0", "item1", values=("demo",))
-database_HierTreeview.insert("", "1", "item2", values=("demo 1",))
-database_HierTreeview.insert("", "end", "item3", values=("demo 2",))
+database_HierTreeview = ttk.Treeview(root)
+#database_HierTreeview.heading("database_tree", text="Database Tree")
+
+#data--#todo generate the data to be added in a way to reflect the data in fileDisplay Hierarchical treeview
+database_HierTreeview.insert("", "0", "item1", text=("demo",))
+database_HierTreeview.insert("", "1", "item2", text=("deme",))
+database_HierTreeview.insert("", "2", "item3", text=("dmmm",))
+database_HierTreeview.insert("", "end", "item4", text=("domo",))
 database_HierTreeview.insert("item1", "end", "demo C1", text="demo C1")
 database_HierTreeview.insert("item1", "end", "demo C2", text="demo C1")
 database_HierTreeview.insert("item2", "end", "demo C3", text="demo C2")
 database_HierTreeview.insert("item3", "end", "demo C4", text="demo C1")
-#database_HierTreeview.move('item2', 'item1', 'end') 
-#database_HierTreeview.move('item3', 'item1', 'end')
+database_HierTreeview.move('item2', 'item1', 'end') 
+database_HierTreeview.move('item3', 'item1', 'end')
 #--
 database_HierTreeview.grid(column=0, row=0, sticky="ns")
 
-#FileDisplay-----#todo add data
+#FileDisplay-----#todo generate cols dynamically after the data is collected
 file_frame = ttk.Frame(root)
 file_TV_catagories = []
 file_cols = ["file_name", "file_entry_date", "file_type"]
@@ -54,10 +55,20 @@ file_frame.rowconfigure(0, weight=1)
 file_frame.rowconfigure(1, weight=0)
 
 database_fileTreeview = ttk.Treeview(file_frame, columns=file_cols, show="headings")
-#todo fix the string slise to remove the "_"
+#genrating the names of the columns of the File Treeview
 for colId in file_cols:
-    database_fileTreeview.heading(colId, text=colId.strip("_").capitalize())
+    long_text = str()
+    tx = colId.capitalize().split("_")
+    for word in tx:
+        long_text = long_text + " " + word
+    database_fileTreeview.heading(colId, text=long_text)
 
+#data--#todo generate the data to be added
+
+database_fileTreeview.insert("", "0", "item01", values=("demo...","doodo", "dede"))
+database_fileTreeview.insert("", "1", "item02", values=("femo","foofo", "fefe"))
+database_fileTreeview.insert("item01", "end", "item01.1", values=("memo","moomo", "meme"))
+#--
 database_fileTreeview.grid(column=0, row=0, sticky="nsew")
 #Infobar-----
 infoBar_frame = ttk.Frame(file_frame)
