@@ -1,6 +1,7 @@
 import tkinter as TK
 from tkinter import Tk, ttk
 import ttkthemes
+from fileFetch import fileFetcher
 
 
 
@@ -93,7 +94,14 @@ file_frame.grid(column=1, row=0, sticky="nsew")
 #file menu item
 file_menu = TK.Menu(root_menu, tearoff=False)
 root_menu.add_cascade(label="File", menu=file_menu)
-file_menu.add_command(label="New")
+
+#sub menu New
+sub_file_menu = TK.Menu(file_menu, tearoff=False)
+#tip lambda make the funchen not work by itself, #todo read about Lambda
+sub_file_menu.add_command(label="New file path", command= lambda :fileFetcher.SetFilePath())
+sub_file_menu.add_command(label="New database")
+file_menu.add_cascade(label="New...", menu=sub_file_menu)
+#--
 file_menu.add_command(label="Open")
 file_menu.add_command(label="Save")
 
