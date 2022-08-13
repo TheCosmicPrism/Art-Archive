@@ -1,5 +1,6 @@
 import tkinter as TK
 from tkinter import Tk, ttk
+from tkinter import commondialog
 import ttkthemes
 from Helper import fileFetcher
 
@@ -13,7 +14,7 @@ class main_app():
     def main_win():
         pass
     
-
+helper = fileFetcher()
 root = TK.Tk()
 root.minsize(560, 480)
 style = TK.ttk.Style()
@@ -98,15 +99,15 @@ root_menu.add_cascade(label="File", menu=file_menu)
 #sub menu New
 sub_file_menu = TK.Menu(file_menu, tearoff=False)
 #tip lambda make the funchen not work by itself, #todo read about Lambda
-sub_file_menu.add_command(label="New file path", command= lambda : fileFetcher.SetFilePath())
-sub_file_menu.add_command(label="New database")
+sub_file_menu.add_command(label="New file path", command= lambda : helper.SetFilePath())
+sub_file_menu.add_command(label="New database", command= lambda : helper.CreateDatabase())
 file_menu.add_cascade(label="New...", menu=sub_file_menu)
 #--
 file_menu.add_command(label="Open")
 file_menu.add_command(label="Save")
 
 file_menu.add_separator()
-file_menu.add_command(label="Exit", command=root.quit)
+file_menu.add_command(label="Exit", command=lambda : helper.CloseDatabase(root.quit))
 #edit menu item
 edit_menu = TK.Menu(root_menu, tearoff=False)
 root_menu.add_cascade(label="Edit", menu=edit_menu)
